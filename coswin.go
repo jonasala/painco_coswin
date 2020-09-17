@@ -126,7 +126,7 @@ func acompanhamentoCoswin(wowoMin, wowoMax int, listaOSM []osm, templateFind *te
 
 		var osmAlvo *osm
 		for _, osm := range listaOSM {
-			if strconv.Itoa(osmAlvo.Codigo) == wowo.WowoString12 {
+			if strconv.Itoa(osm.Codigo) == wowo.WowoString12 {
 				osmAlvo = &osm
 				break
 			}

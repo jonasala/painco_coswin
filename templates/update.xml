@@ -1,0 +1,35 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:poj="http://pojos.ws.siveco.com"
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tns="http://pojos.ws.siveco.com"
+    xmlns:xformat="http://cxf.apache.org/bindings/xformat">
+    <soapenv:Header>
+        <poj:securityHeaderType>
+            <DataSource>{{.CoswinDatasource}}</DataSource>
+            <UserName>{{.CoswinUsername}}</UserName>
+            <password>{{.CoswinPassword}}</password>
+            <language>PT_BR</language>
+        </poj:securityHeaderType>
+    </soapenv:Header>
+    <soapenv:Body>
+        <poj:workorderViewKey>
+            <WowoCode>{{.WowoCode}}</WowoCode>
+        </poj:workorderViewKey>
+        <poj:workorderView>
+            {{if .WowoReporter}}
+            <WowoReporter>{{.WowoReporter}}</WowoReporter>
+            {{end}}
+            {{if .WowoUserStatus}}
+            <WowoUserStatus>{{.WowoUserStatus}}</WowoUserStatus>
+            <WowoStatusComments>{{.WowoStatusComments}}</WowoStatusComments>
+            {{end}}
+            {{if .WowoString12}}
+            <WowoString12>{{.WowoString12}}</WowoString12>
+            {{end}}
+            <WorkOrderExtraViewworkorderView>
+                <WowoJobActivity>{{.WowoJobActivity}}</WowoJobActivity>
+            </WorkOrderExtraViewworkorderView>
+        </poj:workorderView>
+    </soapenv:Body>
+</soapenv:Envelope>

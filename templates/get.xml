@@ -1,0 +1,16 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:poj="http://pojos.ws.siveco.com">
+    <soapenv:Header>
+        <poj:securityHeaderType>
+            <DataSource>{{.CoswinDatasource}}</DataSource>
+            <UserName>{{.CoswinUsername}}</UserName>
+            <password>{{.CoswinPassword}}</password>
+            <language>PT_BR</language>
+        </poj:securityHeaderType>
+    </soapenv:Header>
+    <soapenv:Body>
+        <poj:workorderKey>
+            <WowoCode>{{.WowoCode}}</WowoCode>
+        </poj:workorderKey>
+    </soapenv:Body>
+</soapenv:Envelope>

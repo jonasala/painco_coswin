@@ -1,0 +1,22 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+   xmlns:poj="http://pojos.ws.siveco.com">
+   <soapenv:Header>
+      <poj:securityHeaderType>
+         <DataSource>{{.CoswinDatasource}}</DataSource>
+         <UserName>{{.CoswinUsername}}</UserName>
+         <password>{{.CoswinPassword}}</password>
+         <language>PT_BR</language>
+      </poj:securityHeaderType>
+   </soapenv:Header>
+   <soapenv:Body>
+      <poj:WowoCode>
+         <doubleCriterion>
+            <operator>between</operator>
+            <value1>{{.min}}</value1>
+            <value2>{{.max}}</value2>
+         </doubleCriterion>
+      </poj:WowoCode>
+      <poj:workorderfindfindParameters>
+      </poj:workorderfindfindParameters>
+   </soapenv:Body>
+</soapenv:Envelope>

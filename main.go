@@ -60,9 +60,11 @@ func main() {
 			coswinAcompanhamento = append(coswinAcompanhamento, wowocode)
 		}
 	}
-	minWowo, maxWowo := minmax(coswinAcompanhamento)
-	if err := acompanhamentoCoswin(minWowo, maxWowo, pacoteOSM.Acompanhamento, templateFind); err != nil {
-		log.Println(err)
+	if len(coswinAcompanhamento) > 0 {
+		minWowo, maxWowo := minmax(coswinAcompanhamento)
+		if err := acompanhamentoCoswin(minWowo, maxWowo, pacoteOSM.Acompanhamento, templateFind); err != nil {
+			log.Println(err)
+		}
 	}
 
 	for _, osm := range pacoteOSM.Reabertura {

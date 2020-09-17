@@ -142,7 +142,7 @@ func acompanhamentoCoswin(wowoMin, wowoMax int, listaOSM []osm, templateFind *te
 
 		atualizarOSM(osmAlvo.Codigo, map[string]interface{}{
 			"osm_status":           "R",
-			"osm_observacao_final": wowo.WowoFeedbackNote,
+			"osm_observacao_final": strings.ReplaceAll(wowo.WowoFeedbackNote, "<br>", "\n"),
 			"osm_data_hora_fim":    dataFim.Format("2006-01-02 15:04:05"),
 		})
 	}

@@ -60,7 +60,7 @@ func atualizarOSM(codigoOSM int, data map[string]interface{}) error {
 	}
 
 	response, err := http.Post(
-		PortalURL+"/listar_osm.php?osm="+strconv.Itoa(codigoOSM)+"API_KEY="+PortalAPIKey,
+		PortalURL+"/atualizar_osm.php?osm="+strconv.Itoa(codigoOSM)+"&API_KEY="+PortalAPIKey,
 		"application/json",
 		bytes.NewBuffer(requestBody),
 	)

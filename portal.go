@@ -21,7 +21,7 @@ type osm struct {
 	Descricao            string      `json:"descricao"`
 	ObservacaoAnalise    string      `json:"observacao_analise"`
 	ObservacaoReabertura string      `json:"observacao_reabertura"`
-	Revisao              int         `json:"revisao"`
+	Revisao              string      `json:"revisao"`
 	Coswin               string      `json:"coswin"`
 }
 

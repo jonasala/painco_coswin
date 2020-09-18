@@ -136,7 +136,7 @@ func acompanhamentoCoswin(wowoMin, wowoMax int, listaOSM []osm, templateFind, te
 			continue
 		}
 
-		if osmAlvo.Revisao > wowo.WowoNumber12 {
+		if osmAlvo.Revisao != wowo.WowoNumber12 {
 			return reaberturaCoswin(*osmAlvo, templateUpdate)
 		}
 

@@ -64,4 +64,5 @@ type workorderfind struct {
 	WowoFeedbackNote string
 	WowoEndDate      string
 	WowoString12     string
+	WowoNumber12     int
 }

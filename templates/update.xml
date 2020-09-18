@@ -27,6 +27,9 @@
             {{if .WowoString12}}
             <WowoString12>{{.WowoString12}}</WowoString12>
             {{end}}
+            {{if .WowoNumber12}}
+            <WowoNumber12>{{.WowoNumber12}}</WowoNumber12>
+            {{end}}
             <WorkOrderExtraViewworkorderView>
                 <WowoJobActivity>{{.WowoJobActivity}}</WowoJobActivity>
             </WorkOrderExtraViewworkorderView>

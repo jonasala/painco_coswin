@@ -64,6 +64,7 @@ func criarWoWo(osm osm, templateCreate, templateUpdate *template.Template) error
 		"WowoCode":        envCreate.Body.WorkOrderCreateSimpleKey.WowoCode,
 		"WowoReporter":    solicitante,
 		"WowoString12":    osm.Codigo,
+		"WowoNumber12":    osm.Revisao,
 		"WowoJobActivity": "<![CDATA[---OBSERVAÇÕES DE ANÁLISE---<br/>" + osm.ObservacaoAnalise + "]]>",
 	})
 	if err != nil {
@@ -89,7 +90,7 @@ func criarWoWo(osm osm, templateCreate, templateUpdate *template.Template) error
 	return nil
 }
 
-func acompanhamentoCoswin(wowoMin, wowoMax int, listaOSM []osm, templateFind *template.Template) error {
+func acompanhamentoCoswin(wowoMin, wowoMax int, listaOSM []osm, templateFind, templateUpdate *template.Template) error {
 	/* Listar WOWO do Coswin */
 	requestBody, err := executeTemplate(templateFind, map[string]interface{}{
 		"min": wowoMin,
@@ -135,6 +136,10 @@ func acompanhamentoCoswin(wowoMin, wowoMax int, listaOSM []osm, templateFind *te
 			continue
 		}
 
+		if osmAlvo.Revisao > wowo.WowoNumber12 {
+			return reaberturaCoswin(*osmAlvo, templateUpdate)
+		}
+
 		dataFim, err := time.Parse("2006-01-02T15:04:05", wowo.WowoEndDate)
 		if err != nil {
 			dataFim = time.Now()
@@ -162,6 +167,7 @@ func reaberturaCoswin(osm osm, templateUpdate *template.Template) error {
 		"WowoUserStatus":     "M",
 		"WowoJobActivity":    "<![CDATA[---OBSERVAÇÕES DE ANÁLISE---<br/>" + osm.ObservacaoAnalise + "<br/><br/>---OBSERVAÇÕES DE REABERTURA---<br/>" + osm.ObservacaoReabertura + "]]>",
 		"WowoStatusComments": descricao,
+		"WowoNumber12":       osm.Revisao,
 	})
 	if err != nil {
 		return err

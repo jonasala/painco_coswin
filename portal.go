@@ -21,12 +21,12 @@ type osm struct {
 	Descricao            string      `json:"descricao"`
 	ObservacaoAnalise    string      `json:"observacao_analise"`
 	ObservacaoReabertura string      `json:"observacao_reabertura"`
+	Revisao              int         `json:"revisao"`
 	Coswin               string      `json:"coswin"`
 }
 
 type pacote struct {
 	Novo           []osm `json:"novo"`
-	Reabertura     []osm `json:"reabertura"`
 	Acompanhamento []osm `json:"acompanhamento"`
 }
 

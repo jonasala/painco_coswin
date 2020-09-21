@@ -117,6 +117,8 @@ func acompanhamentoCoswin(wowoMin, wowoMax int, listaOSM []osm, templateFind, te
 		return err
 	}
 
+	log.Printf("Acomanhamento FIND:\n----REQUEST---\n%v\n----RESPONSE----\n%v\n", requestBody.String(), string(body))
+
 	envFind := envelopeFind{}
 	if err := xml.Unmarshal(body, &envFind); err != nil {
 		return err

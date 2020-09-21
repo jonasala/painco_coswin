@@ -181,6 +181,7 @@ func reaberturaCoswin(osm osm, templateUpdate *template.Template) error {
 	if err != nil {
 		return err
 	}
+	log.Printf("REABERTURA:\n----REQUEST---\n%v\n", requestBody.String())
 
 	response, err := http.Post(
 		CoswinURL+"/services/workorder/update",
@@ -192,6 +193,13 @@ func reaberturaCoswin(osm osm, templateUpdate *template.Template) error {
 		return err
 	}
 	defer response.Body.Close()
+
+	body, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return err
+	}
+
+	log.Printf("----RESPONSE---\n%v\n", string(body))
 
 	return nil
 }

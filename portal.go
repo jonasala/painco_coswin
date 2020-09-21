@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strconv"
 )
@@ -50,6 +51,8 @@ func carregarOSM() (*pacote, error) {
 		return nil, err
 	}
 
+	log.Printf("Carregar OSM:\n%+v\n", osm)
+
 	return &osm, nil
 }
 
@@ -69,6 +72,9 @@ func atualizarOSM(codigoOSM int, data map[string]interface{}) error {
 		return err
 	}
 	defer response.Body.Close()
+
+	body, _ := ioutil.ReadAll(response.Body)
+	log.Printf("Atualizar OSM:---REQUEST---\n%v\n\n---RESPONSE---\n%v\n", string(requestBody), string(body))
 
 	return nil
 }

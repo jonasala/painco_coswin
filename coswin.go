@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/xml"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strconv"
 	"strings"
@@ -136,10 +137,14 @@ func acompanhamentoCoswin(wowoMin, wowoMax int, listaOSM []osm, templateFind, te
 			continue
 		}
 
+		log.Printf("Acompanhamento:\n----ALVO:----\n%+v", osmAlvo)
+
 		if osmAlvo.Revisao != wowo.WowoNumber12 {
+			log.Println("AÇÃO: REABERTURA")
 			return reaberturaCoswin(*osmAlvo, templateUpdate)
 		}
 
+		log.Println("AÇÃO: RESOLUÇÃO")
 		dataFim, err := time.Parse("2006-01-02T15:04:05", wowo.WowoEndDate)
 		if err != nil {
 			dataFim = time.Now()

@@ -176,7 +176,7 @@ func reaberturaCoswin(osm osm, templateUpdate *template.Template) error {
 		"WowoUserStatus":     "M",
 		"WowoJobActivity":    "<![CDATA[---OBSERVAÇÕES DE ANÁLISE---<br/>" + osm.ObservacaoAnalise + "<br/><br/>---OBSERVAÇÕES DE REABERTURA---<br/>" + osm.ObservacaoReabertura + "]]>",
 		"WowoStatusComments": descricao,
-		"WowoNumber12":       osm.Revisao,
+		"WowoString13":       osm.Revisao,
 	})
 	if err != nil {
 		return err

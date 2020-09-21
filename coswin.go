@@ -143,7 +143,7 @@ func acompanhamentoCoswin(wowoMin, wowoMax int, listaOSM []osm, templateFind, te
 
 		log.Printf("Acompanhamento:\n----ALVO:----\n%+v", osmAlvo)
 
-		if osmAlvo.Revisao != wowo.WowoNumber12 {
+		if osmAlvo.Revisao != wowo.WowoString13 {
 			log.Println("AÇÃO: REABERTURA")
 			return reaberturaCoswin(*osmAlvo, templateUpdate)
 		}

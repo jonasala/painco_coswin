@@ -131,6 +131,9 @@ func acompanhamentoCoswin(wowoMin, wowoMax int, listaOSM []osm, templateFind, te
 		}
 
 		infoOSM := strings.Split(wowo.WowoString12, ".")
+		if len(infoOSM) != 2 {
+			continue
+		}
 
 		var osmAlvo *osm
 		for _, osm := range listaOSM {

@@ -174,14 +174,12 @@ func reaberturaCoswin(osm osm, templateUpdate *template.Template) error {
 	requestBody, err := executeTemplate(templateUpdate, map[string]interface{}{
 		"WowoCode":           osm.Coswin,
 		"WowoUserStatus":     "M",
-		"WowoJobActivity":    "<![CDATA[---OBSERVAÇÕES DE ANÁLISE---<br/>" + osm.ObservacaoAnalise + "<br/><br/>---OBSERVAÇÕES DE REABERTURA---<br/>" + osm.ObservacaoReabertura + "]]>",
 		"WowoStatusComments": descricao,
-		"WowoString13":       osm.Revisao,
 	})
 	if err != nil {
 		return err
 	}
-	log.Printf("REABERTURA:\n----REQUEST---\n%v\n", requestBody.String())
+	log.Printf("REABERTURA 1 - STATUS:\n----REQUEST---\n%v\n", requestBody.String())
 
 	response, err := http.Post(
 		CoswinURL+"/services/workorder/update",
@@ -199,7 +197,35 @@ func reaberturaCoswin(osm osm, templateUpdate *template.Template) error {
 		return err
 	}
 
-	log.Printf("----RESPONSE---\n%v\n", string(body))
+	log.Printf("----RESPONSE 1 - STATUS---\n%v\n", string(body))
+
+	requestBody, err = executeTemplate(templateUpdate, map[string]interface{}{
+		"WowoCode":        osm.Coswin,
+		"WowoJobActivity": "<![CDATA[---OBSERVAÇÕES DE ANÁLISE---<br/>" + osm.ObservacaoAnalise + "<br/><br/>---OBSERVAÇÕES DE REABERTURA---<br/>" + osm.ObservacaoReabertura + "]]>",
+		"WowoString13":    osm.Revisao,
+	})
+	if err != nil {
+		return err
+	}
+	log.Printf("REABERTURA 2 - INFO:\n----REQUEST---\n%v\n", requestBody.String())
+
+	response2, err := http.Post(
+		CoswinURL+"/services/workorder/update",
+		"application/xml",
+		&requestBody,
+	)
+
+	if err != nil {
+		return err
+	}
+	defer response2.Body.Close()
+
+	body, err = ioutil.ReadAll(response2.Body)
+	if err != nil {
+		return err
+	}
+
+	log.Printf("----RESPONSE 2 - INFO---\n%v\n", string(body))
 
 	return nil
 }

@@ -16,12 +16,12 @@
         <poj:workorderViewKey>
             <WowoCode>{{.WowoCode}}</WowoCode>
         </poj:workorderViewKey>
-        <poj:workorderView>{{if .WowoReporter}}
-            <WowoReporter>{{.WowoReporter}}</WowoReporter>{{end}}{{if .WowoUserStatus}}
-            <WowoUserStatus>{{.WowoUserStatus}}</WowoUserStatus>
-            <WowoStatusComments>{{.WowoStatusComments}}</WowoStatusComments>{{end}}{{if .WowoString12}}
+        <poj:workorderView>{{if .WowoUserStatus}}
+            <WowoUserStatus>{{.WowoUserStatus}}</WowoUserStatus>{{end}}{{if .WowoReporter}}
+            <WowoReporter>{{.WowoReporter}}</WowoReporter>{{end}}{{if .WowoString12}}
             <WowoString12>{{.WowoString12}}</WowoString12>{{end}}{{if .WowoString13}}
-            <WowoString13>{{.WowoString13}}</WowoString13>{{end}}
+            <WowoString13>{{.WowoString13}}</WowoString13>{{end}}{{if .WowoUserStatus}}
+            <WowoStatusComments>{{.WowoStatusComments}}</WowoStatusComments>{{end}}
             <WorkOrderExtraViewworkorderView>
                 <WowoJobActivity>{{.WowoJobActivity}}</WowoJobActivity>
             </WorkOrderExtraViewworkorderView>

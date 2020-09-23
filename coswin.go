@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/xml"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -64,8 +65,7 @@ func criarWoWo(osm osm, templateCreate, templateUpdate *template.Template) error
 	requestBody, err = executeTemplate(templateUpdate, map[string]interface{}{
 		"WowoCode":        envCreate.Body.WorkOrderCreateSimpleKey.WowoCode,
 		"WowoReporter":    solicitante,
-		"WowoString12":    osm.Codigo,
-		"WowoNumber12":    osm.Revisao,
+		"WowoString12":    fmt.Sprintf("%v.%v", osm.Codigo, osm.Revisao),
 		"WowoJobActivity": "<![CDATA[---OBSERVAÇÕES DE ANÁLISE---<br/>" + osm.ObservacaoAnalise + "]]>",
 	})
 	if err != nil {
@@ -130,9 +130,11 @@ func acompanhamentoCoswin(wowoMin, wowoMax int, listaOSM []osm, templateFind, te
 			continue
 		}
 
+		infoOSM := strings.Split(wowo.WowoString12, ".")
+
 		var osmAlvo *osm
 		for _, osm := range listaOSM {
-			if strconv.Itoa(osm.Codigo) == wowo.WowoString12 {
+			if strconv.Itoa(osm.Codigo) == infoOSM[0] {
 				osmAlvo = &osm
 				break
 			}
@@ -143,7 +145,7 @@ func acompanhamentoCoswin(wowoMin, wowoMax int, listaOSM []osm, templateFind, te
 
 		log.Printf("Acompanhamento:\n----ALVO:----\n%+v", osmAlvo)
 
-		if osmAlvo.Revisao != wowo.WowoString13 {
+		if osmAlvo.Revisao != infoOSM[1] {
 			log.Println("AÇÃO: REABERTURA")
 			return reaberturaCoswin(*osmAlvo, templateUpdate)
 		}
@@ -202,7 +204,7 @@ func reaberturaCoswin(osm osm, templateUpdate *template.Template) error {
 	requestBody, err = executeTemplate(templateUpdate, map[string]interface{}{
 		"WowoCode":        osm.Coswin,
 		"WowoJobActivity": "<![CDATA[---OBSERVAÇÕES DE ANÁLISE---<br/>" + osm.ObservacaoAnalise + "<br/><br/>---OBSERVAÇÕES DE REABERTURA---<br/>" + osm.ObservacaoReabertura + "]]>",
-		"WowoString13":    osm.Revisao,
+		"WowoString12":    fmt.Sprintf("%v.%v", osm.Codigo, osm.Revisao),
 	})
 	if err != nil {
 		return err

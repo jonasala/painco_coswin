@@ -21,9 +21,9 @@
             <WowoReporter>{{.WowoReporter}}</WowoReporter>{{end}}{{if .WowoString12}}
             <WowoString12>{{.WowoString12}}</WowoString12>{{end}}{{if .WowoString13}}
             <WowoString13>{{.WowoString13}}</WowoString13>{{end}}{{if .WowoUserStatus}}
-            <WowoStatusComments>{{.WowoStatusComments}}</WowoStatusComments>{{end}}{{if .WowoJobActivity}}<WorkOrderExtraViewworkorderView>
-                <WowoJobActivity>{{.WowoJobActivity}}</WowoJobActivity>
-            </WorkOrderExtraViewworkorderView>{{end}}
+            <WowoStatusComments>{{.WowoStatusComments}}</WowoStatusComments>{{end}}
+            <WorkOrderExtraViewworkorderView>{{if .WowoJobActivity}}<WowoJobActivity>{{.WowoJobActivity}}</WowoJobActivity>{{end}}
+            </WorkOrderExtraViewworkorderView>
         </poj:workorderView>
     </soapenv:Body>
 </soapenv:Envelope>
